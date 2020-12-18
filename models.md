@@ -10,6 +10,16 @@ The following conventions apply:
 - text (string) properties marked with `thesaurus` have their value picked from a predefined taxonomy.
 - text (string) properties marked with MD represent a text with basic formatting (e.g. bold, italic, etc.), rather than a plain text with no formatting at all (which is the default).
 
+Example:
+
+- `LemmaPart`\*:
+  - `lemma`\* (`string`): lemma.
+  - `normLemma`\* (`string`): normalized form of the lemma.
+  - `pos`\* (`string`, thesaurus): part of speech.
+  - `note` (`string`): optional short note.
+
+This means that our model for the lemma is represented by an object with name `LemmaPart`, having properties `lemma`, `normLemma`, `pos`, and `note`. Among them, only `note` is optional; all the others are required. Also, all the property entries are string's (=text).
+
 ## Items
 
 In this project there are 5 types of items:
