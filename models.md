@@ -1,5 +1,15 @@
 # PURA Models
 
+Legenda: in the following documentation, each data model is represented by a named object with any number of properties. Each property can either be a scalar ("simple") property, like a number, a text (string), a boolean (=yes/no) value, etc. Properties can freely nest.
+
+The following conventions apply:
+
+- required properties are marked by an asterisk.
+- each property has a data type expressed in `()`.
+- properties representing a list have their data type suffixed with `[]`.
+- text (string) properties marked with `thesaurus` have their value picked from a predefined taxonomy.
+- text (string) properties marked with MD represent a text with basic formatting (e.g. bold, italic, etc.), rather than a plain text with no formatting at all (which is the default).
+
 ## Items
 
 In this project there are 5 types of items:
