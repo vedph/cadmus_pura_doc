@@ -12,43 +12,42 @@ The following conventions apply:
 - text (string) properties marked with `thesaurus` have their value picked from a predefined taxonomy.
 - text (string) properties marked with MD represent a text with basic formatting (e.g. bold, italic, etc.), rather than a plain text with no formatting at all (which is the default).
 
-Example:
-
-- `LemmaPart`\*:
-  - `lemma`\* (`string`): lemma.
-  - `normLemma`\* (`string`): normalized form of the lemma.
-  - `pos`\* (`string`, thesaurus): part of speech.
-  - `note` (`string`): optional short note.
-
-This means that our model for the lemma is represented by an object with name `LemmaPart`, having properties `lemma`, `normLemma`, `pos`, and `note`. Among them, only `note` is optional; all the others are required. Also, all the property entries are string's (=text).
-
 ## Items
 
-In this project there are 5 types of items:
+In this project there are 4 types of items:
 
 - lemmata: a sort of specialized dictionary.
 - text with layers: Greek text passages cited in the discussion.
 - manuscripts: codicological descriptions.
 - articles: monographic treatises about general themes.
 
-![items browser](./images/models.png)
+Given that the project was born document-based, this picture shows the essential mapping between the original documents and the target structure:
+
+![mapping](./images/mapping.png)
 
 ## Lemma Item
 
+Each lemma item has a title starting with its first lemma LID (e.g. `ΗΣΥΧΙΟΣ`) followed by space and any other heading text.
+
 - `WordFormsPart`\*:
   - `forms` (`WordForm[]`):
+    - `lid` (`string`): lexicographic ID (LID for short). In the case of this project, it's just the uppercase lemma without diacritics.
     - `prelemma` (`string`)
     - `lemma`\* (`string`)
     - `postlemma` (`string`)
     - `homograph` (`integer`)
     - `pos`\* (`string`, thesaurus): part of speech.
     - `note` (`string`): optional short note.
+    - `variants` (`VariantForm[]`): variants or other inflected forms related to this form:
+      - `value`\* (`string`)
+      - `tag` (`string`)
 
 - `CategoriesPart`: [categories](https://github.com/vedph/cadmus_doc/blob/master/web/help/general-parts.md#categories) assigned to the lemma. These will draw data from a hierarchical taxonomy.
 
 - `IndexKeywordsPart`: [keywords](https://github.com/vedph/cadmus_doc/blob/master/web/help/general-parts.md#index-keywords) eventually assigned to the lemma.
 
 - `CommentPart`:
+
   - `tag` (`string`): any tag useful to categorize the comment (e.g. scholarly, explanatory, etc.).
   - `text`\* (`string`, MD): the comment's text.
   - `sources` (`DocReference[]`): [sources](https://github.com/vedph/cadmus_itinera_doc/blob/master/help/doc-references.md):
@@ -63,7 +62,7 @@ In this project there are 5 types of items:
 
 ## Text Item
 
-These are simple passages extracted from various works, and referenced in the discussions. Each item has its group ID equal to the work (e.g. `antiatt`), and its title equal to a stripped down form of the lemma it belongs to (e.g. `ΗΣΥΧΙΟΣ` from `ἡσύχιος`), followed by a dash and the passage local ID (e.g. `-A1`).
+These are simple passages extracted from various works, and referenced in the discussions. Each item has its group ID equal to the work (e.g. `antiatt`), and its title equal to the LID of the main lemma (e.g. `ΗΣΥΧΙΟΣ` from `ἡσύχιος`), followed by a dash and the passage local ID (e.g. `-A1`).
 
 - `TokenTextPart`\*: [text passage](https://github.com/vedph/cadmus_doc/blob/master/web/help/general-parts.md#token-text).
 
@@ -95,6 +94,7 @@ See [TGR](https://github.com/vedph/cadmus_tgr_doc/blob/master/models.md).
 ## Article Item
 
 - `NotePart`: the article. A generic [note](https://github.com/vedph/cadmus_doc/blob/master/web/help/general-parts.md#note) can be used here, as its model just includes a tag and a MD text. The MD text also includes a minimalist tagging for:
+
   - references to ancient authors (`{ra:...}`)
   - references to modern authors (`{rm:...}`)
   - references to text passages (`{rt:...}`)
