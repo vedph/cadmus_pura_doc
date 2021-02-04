@@ -82,7 +82,7 @@ These are simple passages extracted from various works, and referenced in the di
 
 - `LingTagsLayerFragment`: [linguistic tags layer](https://github.com/vedph/cadmus_tgr_doc/blob/master/models.md#lingtagslayerfragment).
 
-- `LemmaTagsLayerFragment`: lemmata layer: this annotates the reference lemma for a specific portion of the text passage:
+- `LemmaTagLayerFragment`: lemmata layer: this annotates the reference lemma for a specific portion of the text passage:
   - `tag` (`string`)
   - `value`\* (`string`)
   - `normValue`\* (`string`)
