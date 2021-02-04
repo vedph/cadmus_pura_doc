@@ -42,6 +42,8 @@ Each lemma item has a title starting with its first lemma LID (e.g. `ΗΣΥΧΙ�
       - `value`\* (`string`)
       - `tag` (`string`)
 
+Occasionally, the lemma can also consist in a syntactic pattern. In this case, `pos` will have a special value encoding the pattern, and lemma will be represented by a string where each tag is an uppercase abbreviation prefixed with `/`, and can be applied to specific words, or syntactic constituents, included between square brackets. For instance, we might have `[ἔχω/V /ADV]/VP` representing a verbal phrase (`/VP`) built from the verb (`/V`) `ἔχω` plus an unspecified adverb (`/ADV`) to mean a state.
+
 - `CategoriesPart`: [categories](https://github.com/vedph/cadmus_doc/blob/master/web/help/general-parts.md#categories) assigned to the lemma. These will draw data from a hierarchical taxonomy.
 
 - `IndexKeywordsPart`: [keywords](https://github.com/vedph/cadmus_doc/blob/master/web/help/general-parts.md#index-keywords) eventually assigned to the lemma.
@@ -98,7 +100,10 @@ See [TGR](https://github.com/vedph/cadmus_tgr_doc/blob/master/models.md).
   - references to ancient authors (`{ra:...}`)
   - references to modern authors (`{rm:...}`)
   - references to text passages (`{rt:...}`)
+  - manuscripts (`{m:...}`)
   - literals (`{l:...}`)
+
+These minimal tags can be introduced in texts created with any word processor, as this is a content creation scenario to be included.
 
 - `CategoriesPart`: [categories](https://github.com/vedph/cadmus_doc/blob/master/web/help/general-parts.md#categories) assigned to the article. These will draw data from a hierarchical taxonomy.
 
