@@ -21,6 +21,45 @@ In this project there are 4 types of items:
 - manuscripts: codicological descriptions.
 - articles: monographic treatises about general themes.
 
+Each of these items has a number of parts:
+
+- lemma
+  - `WordFormsPart`
+  - `CategoriesPart`
+  - `IndexKeywordsPart`
+  - `CommentPart`
+  - `BibliographyPart`
+
+- text
+  - `TokenTextPart`
+  - `NotePart`
+  - `CategoriesPart`
+  - `IndexKeywordsPart`
+  - `BibliographyPart`
+  - `ApparatusLayerFragment`
+  - `CommentLayerFragment`
+  - `LingTagsLayerFragment`
+  - `LemmaTagLayerFragment`
+
+- manuscript
+  - `CategoriesPart`
+  - `HistoricalDatePart`
+  - `NotePart`
+  - `BibliographyPart`
+  - `MsSignaturesPart`
+  - `MsPlacePart`
+  - `MsContentsPart`
+  - `MsUnitsPart`
+  - `MsScriptsPart`
+  - `MsOrnamentsPart`
+  - `MsHistoryPart`
+
+- article
+  - `NotePart`
+  - `CategoriesPart`
+  - `IndexKeywordsPart`
+  - `BibliographyPart`
+
 Given that the project was born document-based, this picture shows the essential mapping between the original documents and the target structure:
 
 ![mapping](./images/mapping.png)
