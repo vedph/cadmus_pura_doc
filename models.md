@@ -24,7 +24,7 @@ In this project there are 4 types of items:
 Each of these items has a number of parts:
 
 - lemma
-  - `WordFormsPart`
+  - `WordFormsPart` (PURA)
   - `CategoriesPart`
   - `IndexKeywordsPart`
   - `CommentPart`
@@ -38,21 +38,21 @@ Each of these items has a number of parts:
   - `BibliographyPart`
   - `ApparatusLayerFragment`
   - `CommentLayerFragment`
-  - `LingTagsLayerFragment`
-  - `LemmaTagLayerFragment`
+  - `LingTagsLayerFragment` (TGR)
+  - `LemmaTagLayerFragment` (PURA)
 
 - manuscript
   - `CategoriesPart`
   - `HistoricalDatePart`
   - `NotePart`
   - `BibliographyPart`
-  - `MsSignaturesPart`
-  - `MsPlacePart`
-  - `MsContentsPart`
-  - `MsUnitsPart`
-  - `MsScriptsPart`
-  - `MsOrnamentsPart`
-  - `MsHistoryPart`
+  - `MsSignaturesPart` (TGR)
+  - `MsPlacesPart` (TGR)
+  - `MsContentsPart` (TGR)
+  - `MsUnitsPart` (TGR)
+  - `MsScriptsPart` (TGR)
+  - `MsOrnamentsPart` (TGR)
+  - `MsHistoryPart` (TGR)
 
 - article
   - `NotePart`
