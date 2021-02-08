@@ -46,7 +46,7 @@ Each of these items has a number of parts:
   - `HistoricalDatePart`
   - `NotePart`
   - `BibliographyPart`
-  - `MsSignaturesPart` (TGR)
+  - `MsSignaturesPart` (ITINERA)
   - `MsPlacesPart` (TGR)
   - `MsContentsPart` (TGR)
   - `MsUnitsPart` (TGR)
