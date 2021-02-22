@@ -16,14 +16,15 @@ The following conventions apply:
 
 In this project there are 4 types of items:
 
-- lemmata: a sort of specialized dictionary.
-- text with layers: Greek text passages cited in the discussion.
-- manuscripts: codicological descriptions.
-- articles: monographic treatises about general themes.
+- **lemmata**: a sort of specialized dictionary. It mostly includes words, and occasionally syntactic constructs, either generic or involving a specific word. Each lemma has an ID equal to a normalized form of it (uppercase letters only, no diacritics: e.g. `ΗΣΥΧΙΟΣ`).
+- **text with layers**: Greek text passages cited in the discussion. Each of these texts has as _group ID_ the lemma ID of the related lemma (e.g. `ΗΣΥΧΙΟΣ`). Its title is the same lemma ID, plus a suffix like `-A2`, `-B1`, etc. corresponding to conventional numberings used in the commentary to address each specific text (e.g. `ΗΣΥΧΙΟΣ-A1`).
+- **manuscripts**: codicological descriptions.
+- **articles**: monographic comment about the lemma. Its _group ID_ is equal to the lemma ID (e.g. `ΗΣΥΧΙΟΣ`).
 
 Each of these items has a number of parts:
 
 - lemma
+
   - `WordFormsPart` (PURA)
   - `CategoriesPart`
   - `IndexKeywordsPart`
@@ -31,8 +32,10 @@ Each of these items has a number of parts:
   - `BibliographyPart`
 
 - text
+
   - `TokenTextPart`
-  - `NotePart`
+  - `NotePart` (role translation)
+  - `NotePart` (role apparatus)
   - `CategoriesPart`
   - `IndexKeywordsPart`
   - `BibliographyPart`
@@ -42,6 +45,7 @@ Each of these items has a number of parts:
   - `LemmaTagLayerFragment` (PURA)
 
 - manuscript
+
   - `CategoriesPart`
   - `HistoricalDatePart`
   - `NotePart`
@@ -107,7 +111,7 @@ These are simple passages extracted from various works, and referenced in the di
 
 - `TokenTextPart`\*: [text passage](https://github.com/vedph/cadmus_doc/blob/master/web/help/general-parts.md#token-text).
 
-- [NotePart](https://github.com/vedph/cadmus_doc/blob/master/web/help/general-parts.md#note) for translation, with `role`=`transl` (`NotePart`).
+- [NotePart](https://github.com/vedph/cadmus_doc/blob/master/web/help/general-parts.md#note): for translation, with `role`=`transl`; for apparatus text, with `role`=`app`.
 
 - `CategoriesPart`: [categories](https://github.com/vedph/cadmus_doc/blob/master/web/help/general-parts.md#categories) assigned to the text passage. These will draw data from a hierarchical taxonomy.
 
