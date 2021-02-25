@@ -83,6 +83,7 @@ Each lemma item has a title starting with its first lemma LID (e.g. `ΗΣΥΧΙ�
     - `note` (`string`): optional short note.
     - `variants` (`VariantForm[]`): variants or other inflected forms related to this form:
       - `value`\* (`string`)
+      - `pos`\* (`string`, thesaurus): part of speech.
       - `tag` (`string`)
 
 Occasionally, the lemma can also consist in a syntactic pattern. In this case, `pos` will have a special value encoding the pattern, and lemma will be represented by a string where each tag is an uppercase abbreviation prefixed with `/`, and can be applied to specific words, or syntactic constituents, included between square brackets. For instance, we might have `[ἔχω/V /ADV]/VP` representing a verbal phrase (`/VP`) built from the verb (`/V`) `ἔχω` plus an unspecified adverb (`/ADV`) to mean a state.
