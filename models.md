@@ -1,7 +1,5 @@
 # PURA Models
 
-You can also have a glance at the [graphical overview](overview.md).
-
 Legenda: in the following documentation, each data model is represented by a named object with any number of properties. Each property can either be a scalar ("simple") property, like a number, a text (string), a boolean (=yes/no) value, etc. Properties can freely nest.
 
 The following conventions apply:
@@ -14,55 +12,43 @@ The following conventions apply:
 
 ## Items
 
-In this project there are 4 types of items:
+In this project there are 3 types of items:
 
 - **lemmata**: a sort of specialized dictionary. It mostly includes words, and occasionally syntactic constructs, either generic or involving a specific word. Each lemma has an ID equal to a normalized form of it (uppercase letters only, no diacritics: e.g. `ΗΣΥΧΙΟΣ`).
 - **text with layers**: Greek text passages cited in the discussion. Each of these texts has as _group ID_ the lemma ID of the related lemma (e.g. `ΗΣΥΧΙΟΣ`). Its title is the same lemma ID, plus a suffix like `-A2`, `-B1`, etc. corresponding to conventional numberings used in the commentary to address each specific text (e.g. `ΗΣΥΧΙΟΣ-A1`).
 - **manuscripts**: codicological descriptions.
-- **articles**: monographic comment about the lemma. Its _group ID_ is equal to the lemma ID (e.g. `ΗΣΥΧΙΟΣ`).
 
 Each of these items has a number of parts:
 
-- lemma
+- **lemma**
 
-  - `WordFormsPart` (PURA)
-  - `CategoriesPart`
-  - `IndexKeywordsPart`
-  - `CommentPart`
-  - `BibliographyPart`
+  - `WordFormsPart` (PURA): form(s) and classification.
+  - `CategoriesPart`: categories from a hierarchical set.
+  - `IndexKeywordsPart`: free keywords.
+  - `NotePart` (role=`d`): unstructured commentary with role=D.
+  - `NotePart` (role=`e`): unstructured commentary with role=E.
+  - `NotePart` (role=`biblio`): a non structured bibliography as a text. This is preferred to a structured bibliography as the project does not requires it and is going to directly import pre-existing data here.
 
-- text
+- **text**
 
-  - `TokenTextPart`
-  - `NotePart` (role translation)
-  - `NotePart` (role apparatus)
-  - `CategoriesPart`
-  - `IndexKeywordsPart`
-  - `BibliographyPart`
-  - `ApparatusLayerFragment`
-  - `CommentLayerFragment`
-  - `LingTagsLayerFragment` (TGR)
-  - `LemmaTagLayerFragment` (PURA)
+  - `TokenTextPart`: text with its citation.
+  - `NotePart` (role `transl`): translation.
+  - `NotePart` (role `apparatus`): preferred to a structured apparatus layer as these are just short notes eventually accompanying the text.
+  - `CategoriesPart`: as above, but related to this specific text only.
+  - `IndexKeywordsPart`: as above, but related to this specific text only.
+  
+- **manuscript**
 
-- manuscript
-
-  - `CategoriesPart`
-  - `HistoricalDatePart`
-  - `NotePart`
-  - `BibliographyPart`
-  - `MsSignaturesPart` (ITINERA)
+  - `MsSignaturesPart` (TGR)
   - `MsPlacesPart` (TGR)
+  - `HistoricalDatePart`
   - `MsContentsPart` (TGR)
   - `MsUnitsPart` (TGR)
   - `MsScriptsPart` (TGR)
   - `MsOrnamentsPart` (TGR)
   - `MsHistoryPart` (TGR)
-
-- article
-  - `NotePart`
-  - `CategoriesPart`
-  - `IndexKeywordsPart`
   - `BibliographyPart`
+  - `NotePart`
 
 Given that the project was born document-based, this picture shows the essential mapping between the original documents and the target structure:
 
@@ -92,19 +78,18 @@ Occasionally, the lemma can also consist in a syntactic pattern. In this case, `
 
 - `IndexKeywordsPart`: [keywords](https://github.com/vedph/cadmus_doc/blob/master/web/help/general-parts.md#index-keywords) eventually assigned to the lemma.
 
-- `CommentPart`:
+- [NotePart](https://github.com/vedph/cadmus_doc/blob/master/web/help/general-parts.md#note). Roles: `d`, `e`, `biblio`.
 
-  - `tag` (`string`): any tag useful to categorize the comment (e.g. scholarly, explanatory, etc.).
-  - `text`\* (`string`, MD): the comment's text.
-  - `sources` (`DocReference[]`): [sources](https://github.com/vedph/cadmus_itinera_doc/blob/master/help/doc-references.md):
-    - `tag`
-    - `author`
-    - `work`
-    - `location`
-    - `note`
-  - `externalIds` (`string[]`): [external IDs](https://github.com/vedph/cadmus_itinera_doc/blob/master/help/external-ids.md) of any sort (LOD IDs, link to a webpage or other resource, etc.).
+In `NotePart` with role D/E the MD text also includes a minimalist tagging for:
 
-- `BibliographyPart`: general [bibliography](https://github.com/vedph/cadmus_doc/blob/master/web/help/general-parts.md#bibliography).
+- references to passages in the context of the same item: a capital letter + `.` + digit(s) like `B.1`.
+- references to ancient authors (`{ra:...}`)
+- references to modern authors (`{rm:...}`)
+- references to text passages (`{rt:...}`)
+- manuscripts (`{m:...}`)
+- literals (`{l:...}`)
+
+These minimal tags can be introduced in texts created with any word processor, as this is a content creation scenario to be included.
 
 ## Text Item
 
@@ -118,39 +103,8 @@ These are simple passages extracted from various works, and referenced in the di
 
 - `IndexKeywordsPart`: [keywords](https://github.com/vedph/cadmus_doc/blob/master/web/help/general-parts.md#index-keywords) eventually assigned to the lemma.
 
-- `BibliographyPart`: general [bibliography](https://github.com/vedph/cadmus_doc/blob/master/web/help/general-parts.md#bibliography).
-
-- `ApparatusLayerFragment`: [apparatus layer](https://github.com/vedph/cadmus_doc/blob/master/web/help/philology-parts.md#apparatus).
-
-- `CommentLayerFragment`: comments layer. Each comment fragment has the same model as `CommentPart`.
-
-- `LingTagsLayerFragment`: [linguistic tags layer](https://github.com/vedph/cadmus_tgr_doc/blob/master/models.md#lingtagslayerfragment).
-
-- `LemmaTagLayerFragment`: lemmata layer: this annotates the reference lemma for a specific portion of the text passage:
-  - `tag` (`string`)
-  - `value`\* (`string`)
-  - `normValue`\* (`string`)
-
 ## Manuscript Item
 
 - `BibliographyPart`: general [bibliography](https://github.com/vedph/cadmus_doc/blob/master/web/help/general-parts.md#bibliography).
 
 See [TGR](https://github.com/vedph/cadmus_tgr_doc/blob/master/models.md).
-
-## Article Item
-
-- `NotePart`: the article. A generic [note](https://github.com/vedph/cadmus_doc/blob/master/web/help/general-parts.md#note) can be used here, as its model just includes a tag and a MD text. The MD text also includes a minimalist tagging for:
-
-  - references to ancient authors (`{ra:...}`)
-  - references to modern authors (`{rm:...}`)
-  - references to text passages (`{rt:...}`)
-  - manuscripts (`{m:...}`)
-  - literals (`{l:...}`)
-
-These minimal tags can be introduced in texts created with any word processor, as this is a content creation scenario to be included.
-
-- `CategoriesPart`: [categories](https://github.com/vedph/cadmus_doc/blob/master/web/help/general-parts.md#categories) assigned to the article. These will draw data from a hierarchical taxonomy.
-
-- `IndexKeywordsPart`: [keywords](https://github.com/vedph/cadmus_doc/blob/master/web/help/general-parts.md#index-keywords) eventually assigned to the article.
-
-- `BibliographyPart`: general [bibliography](https://github.com/vedph/cadmus_doc/blob/master/web/help/general-parts.md#bibliography).
