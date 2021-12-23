@@ -2,7 +2,6 @@
 
 ## Conceptual Documentation
 
-- [overview](overview.md)
 - [models](models.md)
 
 ## Pura Graph

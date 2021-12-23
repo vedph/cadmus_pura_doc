@@ -12,6 +12,12 @@ The following conventions apply:
 
 ## Items
 
+The structuration level of this project has been lowered to a minimum to fit its requirements. So, essentially the highest levels of structure survive in the lemma, the manuscript descriptions, and in the categories and keywords scattered across the whole database. Categories belong to a well-defined and hierarchical taxonomy. This allows you to eventually go back from the more specific category to the more generic one, widening or narrowing the search by going up or down the "tree" that represents this hierarchy.
+
+Also, lemma, categories and keywords are ready for [semantic projection](https://github.com/vedph/cadmus_doc/blob/master/core/core.graph.md), and this can be the basis for connecting to linguistic ontologies, but also to eventually provide an index ready to be queried by a presentation client.
+
+The current [mappings](https://github.com/vedph/cadmus_pura/blob/master/Cadmus.Pura.Parts.Test/Assets/PresetMappings.json) to the semantic graph project each lemma with a number of properties, modeled as RDF triples, including their categories and keywords. In turn, the linguistic taxonomy can be projected in the graph as a set of hierarchically ordered classes, thus allowing inferencing.
+
 In this project there are 3 types of items:
 
 - **lemmata**: a sort of specialized dictionary. It mostly includes words, and occasionally syntactic constructs, either generic or involving a specific word. Each lemma has an ID equal to a normalized form of it (uppercase letters only, no diacritics: e.g. `ΗΣΥΧΙΟΣ`).
@@ -27,7 +33,7 @@ Each of these items has a number of parts:
   - `IndexKeywordsPart`: free keywords.
   - `NotePart` (role=`d`): unstructured commentary with role=D.
   - `NotePart` (role=`e`): unstructured commentary with role=E.
-  - `NotePart` (role=`biblio`): a non structured bibliography as a text. This is preferred to a structured bibliography as the project does not requires it and is going to directly import pre-existing data here.
+  - `NotePart` (role=`biblio`): a non-structured bibliography as a text. This is preferred to a structured bibliography as the project does not requires it, and is going to directly import pre-existing data here.
 
 - **text**
 
@@ -47,12 +53,35 @@ Each of these items has a number of parts:
   - `MsScriptsPart` (TGR)
   - `MsOrnamentsPart` (TGR)
   - `MsHistoryPart` (TGR)
-  - `BibliographyPart`
+  - `BibliographyPart`: [structured bibliography](https://github.com/vedph/cadmus_doc/blob/master/web/help/general-parts.md#bibliography) for manuscripts.
   - `NotePart`
 
-Given that the project was born document-based, this picture shows the essential mapping between the original documents and the target structure:
+Given that the project was born document-based and wants to preserve this structure, the picture below shows the essential mapping between the original documents and the target structure:
 
 ![mapping](./images/mapping.png)
+
+At the left you can see the original layout of data in their Word documents. Each Word document there was a complete discussion of a topic connected to a lemma. As such it had a header, and three thematic sections A-B-C reporting all the texts being part of the discussion.
+
+Then, the lemma and its texts are followed by a detailed commentary, articulated in other thematic sections D-E and a final, non-structured bibliography.
+
+As for manuscripts instead, the project chose to directly import the models from another Cadmus-based project (TGR), thus following its higher structuration level. Another even more detailed modeling is available from another Cadmus-based project, but here TGR was preferred because it appeared simpler and less specialized.
+
+In order to give this layout a minimal structure, apart from manuscripts these materials have been split into two big areas: lemma and texts. the following mapping has been implemented:
+
+(1) the lemma header with all its details about it is a lemma item ("record"), including:
+
+- `WordFormPart` with the details about the lemma's form(s).
+- 3 `NotePart`'s, i.e. text parts dedicated to the different sections of the original document: D, E, and unstructured bibliography.
+
+This represents the lemma and its full commentary.
+
+(2) the texts items: these are all the texts connected to the lemma record. Each text is a record on its own, because this allows to add further data to it. Included parts are:
+
+- the text content, which is a short text passage, stored in `TokenTextPart`. Currently the project stores only plain text, without metatextual layers.
+- its translation, stored in a generic `NotePart`.
+- notes about the text constitution, where relevant; this too is a generic text (`NotePart`) rather than an apparatus layer.
+
+Finally, categories (`CategoriesPart`) and keywords (`IndexKeywordsPart`) can be included in both lemma and text items.
 
 ## Lemma Item
 
